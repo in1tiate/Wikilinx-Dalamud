@@ -1,0 +1,3 @@
+[submodule "WikilinxPlugin/thirdparty/ffxiv-lodestone-item-id"]
+	path = WikilinxPlugin/thirdparty/ffxiv-lodestone-item-id
+	url = https://github.com/Asvel/ffxiv-lodestone-item-id.git
