@@ -1,8 +1,8 @@
 {
   "Author": "in1tiate",
   "Name": "Wikilinx Rightclicks",
-  "Punchline": "FFXIV Wiki context menu integration",
-  "Description": "This plugin gets five big gobbie-booms",
+  "Punchline": "FFXIV Wiki and Eorzea DB context menu integration",
+  "Description": "Never forget how to get an item again! Just right-click, and *gobbie-BOOM!* Integrates with any community wiki as well as the official Eorzea DB.",
   "ApplicableVersion": "any",
   "Tags": [
     "wiki",

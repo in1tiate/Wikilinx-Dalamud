@@ -5,12 +5,11 @@ using Dalamud.Interface.Windowing;
 using Dalamud.IoC;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
+using Dalamud.Utility;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 using Lumina.Excel.Sheets;
 using System;
-using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text;
 using WikilinxPlugin.Windows;
 
@@ -136,7 +135,7 @@ public sealed class Plugin : IDalamudPlugin
                 var item = DataManager.Excel.GetSheet<Item>().GetRowOrDefault(itemId);
                 var itemName = item.HasValue ? item.Value.Name : "Couldn't get name";
                 Log.Debug(itemName.ToString() + "(ID " + itemId.ToString() + ")");
-                OpenUrl(Configuration.WikiUrl + itemName.ToString());
+                Util.OpenLink(Configuration.WikiUrl + itemName.ToString());
             }
             catch (Exception ex)
             {
@@ -154,7 +153,7 @@ public sealed class Plugin : IDalamudPlugin
                 var id = GetLodestoneIdFromItemId(itemId);
                 if (id != "")
                 {
-                    OpenUrl("https://na.finalfantasyxiv.com/lodestone/playguide/db/item/" + id.ToString());
+                    Util.OpenLink("https://na.finalfantasyxiv.com/lodestone/playguide/db/item/" + id.ToString());
                 }
                 else
                 {
@@ -172,35 +171,6 @@ public sealed class Plugin : IDalamudPlugin
                 Log.Error(ex, "Failed on context menu for itemId" + itemId);
             }
         };
-    }
-
-    private void OpenUrl(string url)
-    {
-        try
-        {
-            Process.Start(url);
-        }
-        catch
-        {
-            // hack because of this: https://github.com/dotnet/corefx/issues/10361
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                url = url.Replace("&", "^&");
-                Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
-            }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                Process.Start("xdg-open", url);
-            }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-            {
-                Process.Start("open", url);
-            }
-            else
-            {
-                throw;
-            }
-        }
     }
 
     private string GetLodestoneIdFromItemId(uint itemId)
