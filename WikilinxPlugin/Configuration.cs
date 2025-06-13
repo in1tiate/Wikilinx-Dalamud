@@ -1,7 +1,7 @@
 using Dalamud.Configuration;
 using System;
 
-namespace WikilinxPlugin;
+namespace Wikilinx;
 
 [Serializable]
 public class Configuration : IPluginConfiguration

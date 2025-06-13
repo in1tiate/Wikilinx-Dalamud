@@ -1,0 +1,12 @@
+{
+  "Open Wiki Page": "Wikiページを開く",
+  "Open Eorzea DB Page": "エオルゼアDBページを開く",
+  "Enable Eorzea DB Integration": "エオルゼアDB連携を有効にする",
+  "Enable Wiki Integration": "Wiki連携を有効にする",
+  "Wiki URL:": "Wiki URL：",
+  "Replace whitespace in item name": "アイテム名のスペースを置換する",
+  "Replace whitespace with:": "スペースを次の文字に置換:",
+  "Couldn't find Eorzea DB page...": "エオルゼアDBページが見つかりません…",
+  "Unable to find Eorzea DB page for item: {0}": "アイテム「{0}」のエオルゼアDBページが見つかりません",
+  "Couldn't get name": "名前を取得できませんでした"
+}

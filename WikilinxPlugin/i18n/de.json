@@ -1,0 +1,12 @@
+{
+  "Open Wiki Page": "Wiki-Seite öffnen",
+  "Open Eorzea DB Page": "Eorzea-DB-Seite öffnen",
+  "Enable Eorzea DB Integration": "Eorzea DB-Integration aktivieren",
+  "Enable Wiki Integration": "Wiki-Integration aktivieren",
+  "Wiki URL:": "Wiki-URL:",
+  "Replace whitespace in item name": "Ersetzen Sie Leerzeichen im Item Namen",
+  "Replace whitespace with:": "Ersetzen Sie Leerzeichen durch:",
+  "Couldn't find Eorzea DB page...": "Eorzea-DB-Seite konnte nicht gefunden werden…",
+  "Unable to find Eorzea DB page for item: {0}": "Eorzea-DB-Seite für Item „{0}“ nicht gefunden",
+  "Couldn't get name": "Nicht gefunden"
+}

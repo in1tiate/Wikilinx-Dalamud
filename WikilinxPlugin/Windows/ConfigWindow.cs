@@ -3,11 +3,13 @@ using ImGuiNET;
 using System;
 using System.Numerics;
 
-namespace WikilinxPlugin.Windows;
+namespace Wikilinx.Windows;
 
 public class ConfigWindow : Window, IDisposable
 {
-    private Configuration Configuration;
+    private readonly Configuration configuration;
+
+    private readonly Plugin pluginRef;
     public ConfigWindow(Plugin plugin) : base("Wikilinx Configs")
     {
         Flags = ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoScrollbar |
@@ -16,55 +18,56 @@ public class ConfigWindow : Window, IDisposable
         Size = new Vector2(350, 250);
         SizeCondition = ImGuiCond.Always;
 
-        Configuration = plugin.Configuration;
+        configuration = plugin.Configuration;
+        pluginRef = plugin;
     }
 
-    public void Dispose() { }
+    public void Dispose() { GC.SuppressFinalize(this); }
 
     public override void Draw()
     {
         var spacing = Vector2.Create(0.0f, 20.0f);
 
-        var lodestone = Configuration.LodestoneEnabled;
-        if (ImGui.Checkbox("Enable Eorzea DB Integration", ref lodestone))
+        var lodestone = configuration.LodestoneEnabled;
+        if (ImGui.Checkbox(pluginRef.Translate("Enable Eorzea DB Integration"), ref lodestone))
         {
-            Configuration.LodestoneEnabled = lodestone;
-            Configuration.Save();
+            configuration.LodestoneEnabled = lodestone;
+            configuration.Save();
         }
 
         ImGui.Dummy(spacing);
 
-        var wiki = Configuration.WikiEnabled;
-        if (ImGui.Checkbox("Enable Wiki Integration", ref wiki))
+        var wiki = configuration.WikiEnabled;
+        if (ImGui.Checkbox(pluginRef.Translate("Enable Wiki Integration"), ref wiki))
         {
-            Configuration.WikiEnabled = wiki;
-            Configuration.Save();
+            configuration.WikiEnabled = wiki;
+            configuration.Save();
         }
 
 
-        ImGui.TextUnformatted("Wiki URL:");
-        var wikiurl = Configuration.WikiUrl ?? "";
+        ImGui.TextUnformatted(pluginRef.Translate(("Wiki URL:")));
+        var wikiurl = configuration.WikiUrl ?? "";
         ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X);
         if (ImGui.InputText("###wiki-url", ref wikiurl, 1_000))
         {
-            Configuration.WikiUrl = wikiurl;
-            Configuration.Save();
+            configuration.WikiUrl = wikiurl;
+            configuration.Save();
         }
 
-        var whitespace = Configuration.ReplaceWhitespace;
-        if (ImGui.Checkbox("Replace whitespace in item name", ref whitespace))
+        var whitespace = configuration.ReplaceWhitespace;
+        if (ImGui.Checkbox(pluginRef.Translate("Replace whitespace in item name"), ref whitespace))
         {
-            Configuration.ReplaceWhitespace = whitespace;
-            Configuration.Save();
+            configuration.ReplaceWhitespace = whitespace;
+            configuration.Save();
         }
 
-        ImGui.TextUnformatted("Replace whitespace with:");
-        var whitespace_str = Configuration.WhitespaceReplacement ?? "";
+        ImGui.TextUnformatted(pluginRef.Translate("Replace whitespace with:"));
+        var whitespace_str = configuration.WhitespaceReplacement ?? "";
         ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X);
         if (ImGui.InputText("###whitespace-str", ref whitespace_str, 1_000))
         {
-            Configuration.WhitespaceReplacement = whitespace_str;
-            Configuration.Save();
+            configuration.WhitespaceReplacement = whitespace_str;
+            configuration.Save();
         }
 
     }
