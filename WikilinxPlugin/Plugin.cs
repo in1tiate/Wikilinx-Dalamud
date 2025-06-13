@@ -1,4 +1,5 @@
 using Dalamud.Game;
+using Dalamud.Game.Command;
 using Dalamud.Game.Gui.ContextMenu;
 using Dalamud.Game.Text;
 using Dalamud.Interface.ImGuiNotification;
@@ -31,9 +32,13 @@ namespace Wikilinx
 
         [PluginService] internal static INotificationManager NotificationManager { get; private set; } = null!;
 
+        [PluginService] internal static ICommandManager CommandManager { get; private set; } = null!;
+
         public Configuration Configuration { get; init; }
 
         public readonly WindowSystem WindowSystem = new("Wikilinx");
+
+        private const string CommandName = "/wikilinx";
 
         private ConfigWindow ConfigWindow { get; init; }
 
@@ -49,6 +54,11 @@ namespace Wikilinx
             ContextMenu.OnMenuOpened += this.OnContextMenuOpened;
 
             WindowSystem.AddWindow(ConfigWindow);
+
+            CommandManager.AddHandler(CommandName, new CommandInfo(OnCommand)
+            {
+                HelpMessage = "A useful message to display in /xlhelp"
+            });
 
             PluginInterface.UiBuilder.Draw += DrawUI;
 
@@ -245,6 +255,8 @@ namespace Wikilinx
         }
 
         private void DrawUI() => WindowSystem.Draw();
+
+        private void OnCommand(string command, string args) => ToggleConfigUI();
 
         public void ToggleConfigUI() => ConfigWindow.Toggle();
     }
