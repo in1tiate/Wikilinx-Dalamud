@@ -57,7 +57,7 @@ namespace Wikilinx
 
             CommandManager.AddHandler(CommandName, new CommandInfo(OnCommand)
             {
-                HelpMessage = "A useful message to display in /xlhelp"
+                HelpMessage = "Toggle Wikilinx configuration window"
             });
 
             PluginInterface.UiBuilder.Draw += DrawUI;
