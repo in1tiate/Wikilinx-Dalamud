@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Dalamud.NET.Sdk/13.0.0">
   <PropertyGroup>
-    <Version>0.0.0.3</Version>
+    <Version>0.0.0.4</Version>
     <Description>Wiki and Eorzea DB context menu integration plugin</Description>
     <PackageProjectUrl>https://github.com/in1tiate/Wikilinx-Dalamud</PackageProjectUrl>
     <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
